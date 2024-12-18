@@ -1,0 +1,59 @@
+@import "./_reset";
+@import "./_easings";
+@import "./_utils";
+@import "./_font-style";
+@import "./_layout";
+
+:root {
+  --header-height: mobile-vw(58px);
+
+  @include-media ('desktop') {
+    --header-height: desktop-vw(98px);
+  }
+}
+
+/* Core styles that shouldn't be reset */
+body {
+  min-height: 100vh;
+  overscroll-behavior: none;
+  background-color: var(--theme-primary);
+  color: var(--theme-secondary);
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection styling */
+*::selection {
+  background-color: var(--theme-contrast);
+  color: var(--theme-primary);
+}
+
+/* SVG icon colors */
+svg.icon {
+  path[fill],
+  rect[fill],
+  circle[fill] {
+    fill: currentColor;
+  }
+  path[stroke],
+  rect[stroke],
+  circle[stroke] {
+    stroke: currentColor;
+  }
+}
+
+/* Hover states */
+.link {
+  @include-media ('hover') {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Focus states */
+*:focus-visible {
+  outline: 2px solid var(--theme-contrast);
+}
