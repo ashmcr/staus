@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev --turbo",
     "dev:https": "next dev --turbo --experimental-https",
+    "dev:storyblok": "next dev --turbo --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "biome lint",

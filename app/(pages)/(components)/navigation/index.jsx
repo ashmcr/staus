@@ -2,12 +2,13 @@
 
 import cn from 'clsx'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { Link } from '~/components/link'
 import s from './navigation.module.css'
 
 const LINKS = [
   { href: '/', label: 'home' },
-  { href: '/r3f', label: 'r3f' },
+  { href: '/r3f', label: 'projects' },
   { href: '/storyblok', label: 'storyblok' },
   { href: '/shopify', label: 'shopify' },
   { href: '/hubspot', label: 'hubspot' },
@@ -15,26 +16,53 @@ const LINKS = [
 
 export function Navigation() {
   const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false)
+
+  // Close menu when route changes
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
+
+  // Prevent scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   return (
     <nav className={s.nav}>
-      <div className={s.title}>
-        <h1>Satūs</h1>
-        <span>{pathname}</span>
-      </div>
+      <div className={s.container}>
+        <div className={s.title}>
+          <h1>SILLYBOY</h1>
+          <span className={s.pathname}>{pathname}</span>
+        </div>
 
-      <ul className={s.list}>
-        {LINKS.map((link) => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className={cn('link', s.link, pathname === link.href && s.active)}
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+        <button 
+          className={cn(s.hamburger, isOpen && s.active)} 
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Menu"
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <ul className={cn(s.list, isOpen && s.open)}>
+          {LINKS.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={cn('link', s.link, pathname === link.href && s.active)}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   )
 }

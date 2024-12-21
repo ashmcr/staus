@@ -2,7 +2,7 @@
 const colors = {
   black: '#000000',
   white: '#ffffff',
-  red: '#e30613',
+  red: '#FFC7A1',
 }
 
 const themes = {

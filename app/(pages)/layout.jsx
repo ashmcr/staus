@@ -69,15 +69,15 @@ export default function Layout({ children }) {
     >
       <head>
         <StyleVariables colors={colors} themes={themes} />
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
       </head>
-      {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
       <body>
+        {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
         <RealViewport />
         {children}
         <Debug />
         <GSAP />
       </body>
-      {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
     </html>
   )
 }
